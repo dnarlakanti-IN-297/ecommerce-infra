@@ -1,0 +1,36 @@
+# Development environment overrides
+
+frontend:
+  replicaCount: 1
+  resources:
+    requests:
+      memory: "128Mi"
+      cpu: "50m"
+    limits:
+      memory: "256Mi"
+      cpu: "200m"
+
+backend:
+  replicaCount: 2
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "100m"
+    limits:
+      memory: "512Mi"
+      cpu: "500m"
+
+database:
+  persistence:
+    size: 5Gi
+
+ingress:
+  enabled: true
+  hosts:
+    - host: dev.ecommerce.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+
+autoscaling:
+  enabled: false

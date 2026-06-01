@@ -1,0 +1,94 @@
+# Default values for ecommerce 3-tier application
+
+# Frontend (Tier 1)
+frontend:
+  replicaCount: 3
+  image:
+    repository: dnarlakanti/ecommerce-frontend
+    tag: latest # frontend
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 8080
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "100m"
+    limits:
+      memory: "512Mi"
+      cpu: "500m"
+  env:
+    - name: BACKEND_URL
+      value: "http://ecommerce-backend:5000"
+
+# Backend API (Tier 2)
+backend:
+  replicaCount: 5
+  image:
+    repository: dnarlakanti/ecommerce-backend
+    tag: latest # backend
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 5000
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "200m"
+    limits:
+      memory: "1Gi"
+      cpu: "1000m"
+  env:
+    - name: DATABASE_URL
+      value: "postgresql://ecommerce:password@ecommerce-postgres:5432/ecommerce"
+
+# Database (Tier 3)
+database:
+  enabled: true
+  image:
+    repository: postgres
+    tag: "15-alpine"
+  service:
+    type: ClusterIP
+    port: 5432
+  persistence:
+    enabled: true
+    size: 10Gi
+    storageClass: standard
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "250m"
+    limits:
+      memory: "1Gi"
+      cpu: "1000m"
+  env:
+    - name: POSTGRES_DB
+      value: "ecommerce"
+    - name: POSTGRES_USER
+      value: "ecommerce"
+    - name: POSTGRES_PASSWORD
+      value: "password"
+
+# Ingress
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+  hosts:
+    - host: ecommerce.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: ecommerce-tls
+      hosts:
+        - ecommerce.example.com
+
+# HPA (Horizontal Pod Autoscaler)
+autoscaling:
+  enabled: true
+  minReplicas: 3
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 70

@@ -1,0 +1,49 @@
+{{- if .Values.database.enabled }}
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Release.Name }}-postgres
+  labels:
+    app: {{ .Release.Name }}-postgres
+    tier: database
+spec:
+  serviceName: {{ .Release.Name }}-postgres
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-postgres
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-postgres
+        tier: database
+    spec:
+      containers:
+      - name: postgres
+        image: "{{ .Values.database.image.repository }}:{{ .Values.database.image.tag }}"
+        ports:
+        - containerPort: 5432
+          name: postgres
+        env:
+        {{- range .Values.database.env }}
+        - name: {{ .name }}
+          value: {{ .value | quote }}
+        {{- end }}
+        resources:
+          {{- toYaml .Values.database.resources | nindent 10 }}
+        volumeMounts:
+        - name: postgres-storage
+          mountPath: /var/lib/postgresql/data
+          subPath: postgres
+  {{- if .Values.database.persistence.enabled }}
+  volumeClaimTemplates:
+  - metadata:
+      name: postgres-storage
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: {{ .Values.database.persistence.storageClass }}
+      resources:
+        requests:
+          storage: {{ .Values.database.persistence.size }}
+  {{- end }}
+{{- end }}

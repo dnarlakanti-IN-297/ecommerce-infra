@@ -1,0 +1,18 @@
+# Helm
+*.tgz
+.helmignore
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets (do not commit)
+secrets/
+*.secret
+*.key

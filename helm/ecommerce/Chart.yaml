@@ -1,0 +1,14 @@
+apiVersion: v2
+name: ecommerce
+description: 3-Tier E-Commerce Application Helm Chart
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+keywords:
+  - ecommerce
+  - flask
+  - python
+  - 3-tier
+maintainers:
+  - name: dnarlakanti
+    email: dnarlakanti@cloudbees.com
