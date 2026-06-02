@@ -22,12 +22,14 @@ backend:
 
 database:
   persistence:
+    enabled: true
     size: 5Gi
+    storageClass: standard-rwo
 
 ingress:
   enabled: true
   hosts:
-    - host: dev.ecommerce.example.com
+    - host: ecommerce-dev.34.75.0.106.nip.io
       paths:
         - path: /
           pathType: Prefix
