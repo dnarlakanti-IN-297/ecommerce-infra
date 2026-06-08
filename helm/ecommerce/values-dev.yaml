@@ -25,6 +25,13 @@ database:
     enabled: true
     size: 5Gi
     storageClass: standard-rwo
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "100m"
+    limits:
+      memory: "512Mi"
+      cpu: "500m"
 
 ingress:
   enabled: true
