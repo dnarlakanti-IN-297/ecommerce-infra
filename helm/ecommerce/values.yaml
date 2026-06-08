@@ -5,7 +5,7 @@ frontend:
   replicaCount: 3
   image:
     repository: dnarlakanti/ecommerce-frontend
-    tag: fdf0707a10289e0527b7159edbffc318b25e92db # frontend
+    tag: a2381886063abc27ef74fffa0543f10e7c42d5b5 # frontend
     pullPolicy: IfNotPresent
   service:
     type: ClusterIP
@@ -26,7 +26,7 @@ backend:
   replicaCount: 5
   image:
     repository: dnarlakanti/ecommerce-backend
-    tag: fdf0707a10289e0527b7159edbffc318b25e92db # backend
+    tag: a2381886063abc27ef74fffa0543f10e7c42d5b5 # backend
     pullPolicy: IfNotPresent
   service:
     type: ClusterIP
