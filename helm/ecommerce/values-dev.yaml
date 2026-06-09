@@ -11,7 +11,7 @@ frontend:
       cpu: "200m"
 
 backend:
-  replicaCount: 2
+  replicaCount: 1
   resources:
     requests:
       memory: "256Mi"
