@@ -2,6 +2,7 @@
 
 # Frontend (Tier 1)
 frontend:
+  enabled: true
   replicaCount: 3
   image:
     repository: dnarlakanti/ecommerce-frontend
@@ -23,6 +24,7 @@ frontend:
 
 # Backend API (Tier 2)
 backend:
+  enabled: true
   replicaCount: 5
   image:
     repository: dnarlakanti/ecommerce-backend
