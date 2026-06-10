@@ -2,20 +2,20 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ .Release.Name }}-postgres
+  name: ecommerce-postgres
   labels:
-    app: {{ .Release.Name }}-postgres
+    app: ecommerce-postgres
     tier: database
 spec:
-  serviceName: {{ .Release.Name }}-postgres
+  serviceName: ecommerce-postgres
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Release.Name }}-postgres
+      app: ecommerce-postgres
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}-postgres
+        app: ecommerce-postgres
         tier: database
     spec:
       containers:

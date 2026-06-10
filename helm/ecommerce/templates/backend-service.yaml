@@ -4,7 +4,7 @@ kind: Service
 metadata:
   name: ecommerce-backend
   labels:
-    app: {{ .Release.Name }}-backend
+    app: ecommerce-backend
 spec:
   type: {{ .Values.backend.service.type }}
   ports:
@@ -13,5 +13,5 @@ spec:
     protocol: TCP
     name: http
   selector:
-    app: {{ .Release.Name }}-backend
+    app: ecommerce-backend
 {{- end }}

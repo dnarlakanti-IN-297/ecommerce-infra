@@ -4,7 +4,7 @@ kind: Service
 metadata:
   name: ecommerce-postgres
   labels:
-    app: {{ .Release.Name }}-postgres
+    app: ecommerce-postgres
 spec:
   type: {{ .Values.database.service.type }}
   clusterIP: None
@@ -14,5 +14,5 @@ spec:
     protocol: TCP
     name: postgres
   selector:
-    app: {{ .Release.Name }}-postgres
+    app: ecommerce-postgres
 {{- end }}

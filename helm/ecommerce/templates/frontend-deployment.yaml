@@ -2,19 +2,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-frontend
+  name: ecommerce-frontend
   labels:
-    app: {{ .Release.Name }}-frontend
+    app: ecommerce-frontend
     tier: frontend
 spec:
   replicas: {{ .Values.frontend.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Release.Name }}-frontend
+      app: ecommerce-frontend
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}-frontend
+        app: ecommerce-frontend
         tier: frontend
     spec:
       containers:
