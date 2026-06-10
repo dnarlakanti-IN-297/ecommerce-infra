@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ecommerce-postgres
+  labels:
+    app: ecommerce-postgres
+spec:
+  type: {{ .Values.service.type }}
+  clusterIP: None
+  ports:
+  - port: {{ .Values.service.port }}
+    targetPort: 5432
+    protocol: TCP
+    name: postgres
+  selector:
+    app: ecommerce-postgres

@@ -1,0 +1,20 @@
+replicaCount: 3
+
+ingress:
+  hosts:
+    - host: www.ecommerce.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: ecommerce-prod-tls
+      hosts:
+        - www.ecommerce.example.com
+
+resources:
+  requests:
+    memory: "256Mi"
+    cpu: "100m"
+  limits:
+    memory: "512Mi"
+    cpu: "500m"
